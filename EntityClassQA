@@ -1,0 +1,36 @@
+import random
+
+class QuestionAnsweringApplication:
+    def __init__(self, entities):
+        self.entities = entities
+
+    def answer_question(self, question):
+        # Find the entities in the question
+        question_entities = []
+        for entity in self.entities:
+            if entity.name in question:
+                question_entities.append(entity)
+
+        # Generate an answer to the question
+        answer = ""
+        for entity in question_entities:
+            answer += f"{entity.name} is a {entity.entity_type}."
+
+        return answer
+
+# Example usage:
+
+entities = [
+    Entity("John Doe", 0, 5),
+    Entity("Google", 6, 11),
+    Entity("software engineer", 12, 24),
+]
+
+application = QuestionAnsweringApplication(entities)
+
+# Answer the question "What is John Doe's occupation?"
+question = "What is John Doe's occupation?"
+answer = application.answer_question(question)
+
+# Print the answer
+print(answer)
