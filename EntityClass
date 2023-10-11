@@ -1,0 +1,38 @@
+import random
+
+class SETToken:
+    def __init__(self, entity=False, topic=False):
+        self.entity = entity
+        self.topic = topic
+
+    def is_entity(self):
+        return self.entity
+
+    def is_topic(self):
+        return self.topic
+
+class SETAlgorithm:
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.entity = random.choice([True, False])
+        self.topic = random.choice([True, False])
+
+    def get_set_token(self):
+        return SETToken(entity=self.entity, topic=self.topic)
+
+def generate_set_tokens(algorithm, sequence_length):
+    set_tokens = []
+    for i in range(sequence_length):
+        set_tokens.append(algorithm.get_set_token())
+    return set_tokens
+
+# Example usage:
+
+set_algorithm = SETAlgorithm()
+sequence_length = 10
+
+set_tokens = generate_set_tokens(set_algorithm, sequence_length)
+
+print(set_tokens)
