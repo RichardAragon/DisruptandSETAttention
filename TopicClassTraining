@@ -1,0 +1,36 @@
+import random
+
+class TopicModel:
+    def __init__(self, training_data):
+        self.topics = []
+        for sentence in training_data:
+            for topic in sentence.topics:
+                self.topics.append(topic)
+
+    def predict(self, sentence):
+        topics = []
+        for i in range(len(sentence)):
+            # Predict the topic of the current token
+            topic = random.choice(["sports", "politics", "business", "entertainment"])
+
+            # Create a Topic object
+            topic = Topic(topic)
+
+            # Add the Topic object to the list of predicted topics
+            topics.append(topic)
+
+        return topics
+
+# Example usage:
+
+training_data = ["The Golden State Warriors won the NBA championship last year.", "The US economy is growing at a healthy pace.", "Netflix is the world's leading streaming entertainment service."]
+
+model = TopicModel(training_data)
+
+# Predict the topics in the sentence "The president will give a speech on the economy tomorrow."
+sentence = "The president will give a speech on the economy tomorrow."
+predicted_topics = model.predict(sentence)
+
+# Print the predicted topics
+for topic in predicted_topics:
+    print(topic)
