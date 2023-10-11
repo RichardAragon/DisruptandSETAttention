@@ -1,0 +1,35 @@
+class TextSummarizationApplication:
+    def __init__(self, topics):
+        self.topics = topics
+
+    def summarize_text(self, text):
+        # Identify the topics of the text
+        topics = []
+        for sentence in text:
+            for topic in sentence.topics:
+                topics.append(topic)
+
+        # Generate a summary of the text
+        summary = ""
+        for topic in topics:
+            summary += f"The text is about {topic.name}.\n"
+
+        return summary
+
+# Example usage:
+
+topics = [
+    Topic("sports"),
+    Topic("politics"),
+    Topic("business"),
+    Topic("entertainment"),
+]
+
+application = TextSummarizationApplication(topics)
+
+# Summarize the text "The Golden State Warriors won the NBA championship last year. The US economy is growing at a healthy pace. Netflix is the world's leading streaming entertainment service."
+text = "The Golden State Warriors won the NBA championship last year. The US economy is growing at a healthy pace. Netflix is the world's leading streaming entertainment service."
+summary = application.summarize_text(text)
+
+# Print the summary
+print(summary)
