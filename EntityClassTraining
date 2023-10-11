@@ -1,0 +1,36 @@
+import random
+
+class EntityModel:
+    def __init__(self, training_data):
+        self.entities = []
+        for sentence in training_data:
+            for entity in sentence.entities:
+                self.entities.append(entity)
+
+    def predict(self, sentence):
+        entities = []
+        for i in range(len(sentence)):
+            # Predict the entity type of the current token
+            entity_type = random.choice(["person", "organization", "location", "other"])
+
+            # Create an Entity object
+            entity = Entity(entity_type, i, i + 1)
+
+            # Add the Entity object to the list of predicted entities
+            entities.append(entity)
+
+        return entities
+
+# Example usage:
+
+training_data = ["John Doe is a software engineer at Google.", "Google is a multinational technology company."]
+
+model = EntityModel(training_data)
+
+# Predict the entities in the sentence "I met John Doe at Google."
+sentence = "I met John Doe at Google."
+predicted_entities = model.predict(sentence)
+
+# Print the predicted entities
+for entity in predicted_entities:
+    print(entity)
